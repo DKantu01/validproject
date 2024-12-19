@@ -194,7 +194,8 @@ server = Flask(__name__)
 server.config['SECRET_KEY'] = 'your_secret_key_here'
 
 # Create the first Dash app
-app1 = dash.Dash(__name__, server=server, external_stylesheets=[dbc.themes.UNITED], url_base_pathname='/app1/')
+app1 = dash.Dash(__name__, server=server, external_stylesheets=[dbc.themes.CYBORG], url_base_pathname='/app1/')
+#app1 = dash.Dash(__name__, server=server, external_stylesheets=[dbc.themes.UNITED], url_base_pathname='/app1/')
 #app1 = dash.Dash(__name__, server=server, url_base_pathname='/app1/')
 app = app1.server
 # Define the layout of the first Dash app
@@ -317,7 +318,7 @@ content = html.Div(
                data=df4.to_dict("records"),
                page_current=0,
                page_size=PAGE_SIZE,
-               page_action='none'
+               page_action='native'
                )
             ]),
         dbc.Row([
@@ -432,8 +433,6 @@ app2.layout = html.Div([
                     dbc.Row([dbc.Col(sidebar, width=3, className='bg-light'),
                              dbc.Col(content, width=9)],
                             style={"height": "100vh"})
-                    # dbc.Row([], style={"height": "110px"}),       
-                    # dbc.Row([dbc.Col(html.Button('Logout', id='logout-button', n_clicks=0), width=3, className='bg-light')])        
                     ]
             ),
             dcc.Tab(
