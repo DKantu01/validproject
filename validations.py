@@ -194,20 +194,22 @@ server = Flask(__name__)
 server.config['SECRET_KEY'] = 'your_secret_key_here'
 
 # Create the first Dash app
-app1 = dash.Dash(__name__, server=server, external_stylesheets=[dbc.themes.CYBORG], url_base_pathname='/app1/')
-#app1 = dash.Dash(__name__, server=server, external_stylesheets=[dbc.themes.UNITED], url_base_pathname='/app1/')
+#app1 = dash.Dash(__name__, server=server, external_stylesheets=[dbc.themes.BOOTSTRAP], url_base_pathname='/app1/')
+#app1 = dash.Dash(__name__, server=server, external_stylesheets=[dbc.themes.SANDSTONE], url_base_pathname='/app1/')
+app1 = dash.Dash(__name__, server=server, external_stylesheets=[dbc.themes.UNITED], title="Validations Application", url_base_pathname='/app1/')
 #app1 = dash.Dash(__name__, server=server, url_base_pathname='/app1/')
 app = app1.server
 # Define the layout of the first Dash app
 app1.layout = html.Div([
-    html.H1("BVC Validations App", className="card-title"),
+    html.H1("BVC Validations Application",  style={'textAlign': 'center',"width": "100%","padding": "10px","color": "white", "border": "none", "border-radius": "5px",   "cursor": "pointer"}, className="card-title"),
+    html.H2("The tool that gives you the most up-to-date BVC validations",  style={'textAlign': 'center',"width": "100%","padding": "10px","color": "white", "border": "none", "border-radius": "5px",   "cursor": "pointer"}, className="card-title"),
     dcc.Location(id='url', refresh=False),
     html.Div(id="app1-container")
 ])
-internal_stylesheets = ['./assets/style.css']
+#internal_stylesheets = ['./assets/style.css']
 # Create the second Dash app
-#app2 = dash.Dash(__name__, server=server, suppress_callback_exceptions=True, external_stylesheets=[dbc.themes.BOOTSTRAP], url_base_pathname='/app2/')
-app2 = dash.Dash(__name__, server=server, suppress_callback_exceptions=True, external_stylesheets=[dbc.themes.UNITED], url_base_pathname='/app2/')
+app2 = dash.Dash(__name__, server=server, suppress_callback_exceptions=True, external_stylesheets=[dbc.themes.BOOTSTRAP], title="Validations Application", url_base_pathname='/app2/')
+#app2 = dash.Dash(__name__, server=server, suppress_callback_exceptions=True, external_stylesheets=[dbc.themes.UNITED], url_base_pathname='/app2/')
 #app2 = dash.Dash(__name__, server=server, suppress_callback_exceptions=True, external_stylesheets=internal_stylesheets, url_base_pathname='/app2/')
 app = app2.server
 #add validations layout here
@@ -410,8 +412,8 @@ def new_func():
 #end of validations layout
 # Define the layout of the second Dash app
 app2.layout = html.Div([
-    html.H1("Validations Outputs"),
-    html.P("Select categories and download files and charts."),
+    html.H1("Validations Outputs",  style={'textAlign': 'center',"width": "100%","padding": "10px","color": "white", "border": "none", "border-radius": "5px",   "cursor": "pointer"}, className="card-title"),
+    html.P("Select categories and download files and charts.",  style={'textAlign': 'center',"width": "100%","padding": "10px","color": "white", "border": "none", "border-radius": "5px",   "cursor": "pointer"}, className="card-title"),
     dcc.Tabs(
         id="tabs-with-classes-2",
         value='tab-1',
@@ -516,23 +518,224 @@ def read_credentials():
 #     dcc.Input(id='password-input', type='password', placeholder='Password'),
 #     html.Button('Login', id='login-button', n_clicks=0)
 # ])
-login_layout = dbc.Container(
-    dbc.Row(
-        dbc.Col(
-            dbc.Card(
-                dbc.CardBody([
-                    html.H2("Login", className="card-title"),
-                    dcc.Input(id='EmailAddress-input',type='text',placeholder='EmailAddress',style={'margin-bottom': '10px'}),
-                    dcc.Input(id='password-input',type='password',placeholder='Password',style={'margin-bottom': '10px'}),
-                    html.Button('Login', id='login-button', n_clicks=0, className='btn btn-primary'),
-                    html.Div(id='login-output', style={'margin-top': '10px'})
-                ])
-            ),
-            width={'size': 6, 'offset': 3}
-        ),
-        style={'marginTop': '10%'}
-    )
+# login_layout = dbc.Container(
+#     dbc.Row(
+#         dbc.Col(
+#             dbc.Card(
+#                 dbc.CardBody([
+#                     html.H2("Login", className="card-title"),
+#                     dcc.Input(id='EmailAddress-input',type='text',placeholder='EmailAddress',style={'margin-bottom': '10px'}),
+#                     dcc.Input(id='password-input',type='password',placeholder='Password',style={'margin-bottom': '10px'}),
+#                     html.Button('Login', id='login-button', n_clicks=0, className='btn btn-primary'),
+#                     html.Div(id='login-output', style={'margin-top': '10px'})
+#                 ])
+#             ),
+#             width={'size': 6, 'offset': 3}
+#         ),
+#         style={'marginTop': '10%'}
+#     )
+# )
+
+# login_layout = dbc.Container(
+#     dbc.Row(
+#         dbc.Col(
+#             dbc.Card(
+#                 dbc.CardBody(
+#                     [
+#                         # First Row: Email Input
+#                         dbc.Row(
+#                             dbc.Col(
+#                                 dcc.Input(
+#                                     id="EmailAddress-input",
+#                                     type="email",
+#                                     placeholder="Enter your email",
+#                                     style={"width": "100%", "padding": "10px"}
+#                                 ),
+#                                 width=12
+#                             ),
+#                             className="mb-3"  # Space below the row
+#                         ),
+
+#                         # Second Row: Password Input
+#                         dbc.Row(
+#                             dbc.Col(
+#                                 dcc.Input(
+#                                     id="password-input",
+#                                     type="password",
+#                                     placeholder="Enter your password",
+#                                     style={"width": "100%", "padding": "10px"}
+#                                 ),
+#                                 width=12
+#                             ),
+#                             className="mb-3"
+#                         ),
+
+#                         # Third Row: Submit Button
+#                         dbc.Row(
+#                             dbc.Col(
+#                                 html.Button(
+#                                     "Login",
+#                                     id="login-button",
+#                                     n_clicks=0,
+#                                     style={
+#                                         "width": "100%",
+#                                         "padding": "10px",
+#                                         "background-color": "#007bff",
+#                                         "color": "white",
+#                                         "border": "none",
+#                                         "border-radius": "5px",
+#                                         "cursor": "pointer"
+#                                     }
+#                                 ),
+#                                 width=12
+#                             )
+#                         ),
+                        
+#                         html.Div(id='login-output', style={'margin-top': '10px'})
+#                     ]
+#                 ),
+#                 style={
+#                     "width": "400px",  # Resizable width
+#                     "height": "300px",  # Resizable height
+#                     "padding": "20px",
+#                     "border-radius": "10px",
+#                     "box-shadow": "2px 2px 10px rgba(0,0,0,0.2)"
+#                 }
+#             ),
+#             width=12,
+#             className="d-flex justify-content-center align-items-center"
+#         )
+#     ),
+#     fluid=True,
+#     className="vh-100 d-flex justify-content-center align-items-center"
+# )
+
+
+# Smaller overlay card
+overlay_card = dbc.Card(
+    dbc.CardBody([
+        html.H5("Access the Validations App!", className="card-title")
+    ]),
+    style={
+        "width": "200px",
+        "height": "80px",
+        "position": "absolute",
+        "top": "-40px",  # Moves the card up to partially overlay
+        "left": "50%",  
+        "transform": "translateX(-50%)",  # Centers the small card horizontally
+        "zIndex": "10",  # Ensures it stays on top
+        "backgroundColor": "LightSeaGreen"
+    }
 )
+
+
+login_card =  dbc.Card(
+                    dbc.CardBody(
+                        [
+                            dbc.Row(style={"height": "50px"}), # Adjust height as needed
+                            # First Row: Email Input
+                            dbc.Row(
+                                dbc.Col(
+                                    dcc.Input(
+                                        id="EmailAddress-input",
+                                        type="email",
+                                        placeholder="Enter your email",
+                                        style={"margintop":"100px","width": "100%", "padding": "10px"}
+                                    ),
+                                    width=12,
+                                    #style={"margintop":"20px"} # Adjust spacing as needed
+                                ),
+                                className="mb-3"  # Space below the row
+                            ),
+
+                            # Second Row: Password Input
+                            dbc.Row(
+                                dbc.Col(
+                                    dcc.Input(
+                                        id="password-input",
+                                        type="password",
+                                        placeholder="Enter your password",
+                                        style={"width": "100%", "padding": "10px"}
+                                    ),
+                                    width=12
+                                ),
+                                className="mb-3"
+                            ),
+
+                            # Third Row: Submit Button
+                            dbc.Row(
+                                dbc.Col(
+                                    html.Button(
+                                        "Login",
+                                        id="login-button",
+                                        n_clicks=0,
+                                        style={
+                                            "width": "50%",
+                                            "padding": "10px",
+                                            #"background-color": "#007bff",
+                                            "background-color": "#1ABB9C",
+                                            "color": "white",
+                                            "border": "none",
+                                            "border-radius": "5px",
+                                            "cursor": "pointer"
+                                        }
+                                    ),
+                                    width=12
+                                )
+                            ),
+                        
+                            html.Div(id='login-output', style={'margin-top': '10px'})
+                        ]
+                    ),
+                    style={
+                        "width": "400px",  # Resizable width
+                        "height": "300px",  # Resizable height
+                        "padding": "20px",
+                        "border-radius": "10px",
+                        "box-shadow": "2px 2px 10px rgba(0,0,0,0.2)"
+                    }
+            )
+
+
+
+# # Login layout with the container moved up
+# login_layout = dbc.Container(
+#     [
+#         html.Div([overlay_card, login_card], style={"position": "relative", "display": "inline-block"})
+#     ],
+#     style={"position": "relative", "top": "0px"}  # Moves the entire container up
+# )
+
+login_layout = html.Div(
+    children=[
+        dbc.Container(
+            html.Div(
+                [overlay_card, login_card], 
+                style={"position": "relative", "display": "inline-block"}
+            ),
+            style={
+                "display": "flex",
+                "flexDirection": "column",
+                "alignItems": "center",
+                "justifyContent": "center",
+                "height": "100vh",
+                "width": "100%",   # Ensures full width
+                "textAlign": "center"
+            }
+        )
+    ],
+    style={
+        "display": "flex",
+        "justifyContent": "center",  # Centers horizontally
+        "alignItems": "center",      # Centers vertically
+        "height": "100vh",           # Full viewport height
+        "width": "100vw",            # Full viewport width
+        "textAlign": "center"
+    }
+)
+
+
+
 # Callback to handle login
 @app1.callback(
     Output('login-output', 'children', allow_duplicate=True),
